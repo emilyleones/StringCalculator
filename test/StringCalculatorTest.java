@@ -16,4 +16,15 @@ public class StringCalculatorTest {
         assertThat(actualSum, is(expectedSum));
     }
 
+    @Test
+    public void shouldReturnInputNumberWhenOneNumberIsInputted() {
+        StringCalculator calculator = new StringCalculator();
+        String input = "1";
+        int expectedSum = 1;
+
+        int actualSum = calculator.add(input);
+
+        assertThat(actualSum, is(expectedSum));
+    }
+
 }
