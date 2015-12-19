@@ -6,13 +6,17 @@ public class StringCalculator {
             return 0;
         }
         if (numbers.contains(",")) {
-            String[] numberList = numbers.split(",|\n");
-            int sum = 0;
-            for (String number : numberList) {
-                sum += Integer.valueOf(number);
-            }
-            return sum;
+            return sum(numbers);
         }
         return Integer.valueOf(numbers);
+    }
+
+    private int sum(String numbers) {
+        String[] numberList = numbers.split(",|\n");
+        int sum = 0;
+        for (String number : numberList) {
+            sum += Integer.valueOf(number);
+        }
+        return sum;
     }
 }
