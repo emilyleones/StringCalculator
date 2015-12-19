@@ -7,7 +7,10 @@ public class StringCalculator {
         }
         if (numbers.contains(",")) {
             String[] numberList = numbers.split(",");
-            int sum = Integer.valueOf(numberList[0]) + Integer.valueOf(numberList[1]);
+            int sum = 0;
+            for (String number : numberList) {
+                sum += Integer.valueOf(number);
+            }
             return sum;
         }
         return Integer.valueOf(numbers);

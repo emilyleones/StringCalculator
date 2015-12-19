@@ -43,4 +43,13 @@ public class StringCalculatorTest {
         assertThat(actualSum, is(expectedSum));
     }
 
+    @Test
+    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByComma() {
+        String input = "1,2,3";
+        int expectedSum = 6;
+
+        int actualSum = calculator.add(input);
+
+        assertThat(actualSum, is(expectedSum));
+    }
 }
