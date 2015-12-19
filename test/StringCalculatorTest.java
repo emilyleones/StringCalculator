@@ -52,4 +52,14 @@ public class StringCalculatorTest {
 
         assertThat(actualSum, is(expectedSum));
     }
+
+    @Test
+    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByCommaOrNewLine() {
+        String input = "1\n2,3";
+        int expectedSum = 6;
+
+        int actualSum = calculator.add(input);
+
+        assertThat(actualSum, is(expectedSum));
+    }
 }
