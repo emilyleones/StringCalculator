@@ -5,7 +5,7 @@ public class StringCalculator {
         if (numbers.isEmpty()) {
             return 0;
         }
-        if (usingDifferentDelimiter(numbers)) {
+        if (numbers.startsWith("//")) {
             int delimiterStart = 2;
             int delimiterEnd = numbers.indexOf("\n");
             String delimiter = numbers.substring(delimiterStart, delimiterEnd);
@@ -17,21 +17,17 @@ public class StringCalculator {
         return Integer.valueOf(numbers);
     }
 
-    private boolean usingDifferentDelimiter(String numbers) {
-        return numbers.length() > 1 && numbers.substring(0,2).equals("//");
-    }
-
     private int sum(String numbers, String delimiter) {
         String[] numberList = numbers.split(delimiter);
         int sum = 0;
         for (String number : numberList) {
-            checkForNegatives(number);
+            checkIfNegative(number);
             sum += Integer.valueOf(number);
         }
         return sum;
     }
 
-    private void checkForNegatives(String number) {
+    private void checkIfNegative(String number) {
         if (number.contains("-")) {
             try {
                 throw new Exception("negatives not allowed");
