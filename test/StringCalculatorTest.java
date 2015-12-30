@@ -83,6 +83,16 @@ public class StringCalculatorTest {
         assertThat(actualSum, is(expectedSum));
     }
 
+    @Test
+    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByDelimiterLongerThanOneCharacter() {
+        String input = "//&&\n1&&2";
+        int expectedSum = 3;
+
+        int actualSum = calculator.add(input);
+
+        assertThat(actualSum, is(expectedSum));
+    }
+
     //    @Test
 //    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByAnyDelimiter() {
 //        String input = "//;\n1;2";
