@@ -74,7 +74,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByDelimiter() {
+    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedBySingleCharacterDelimiter() {
         String input = "//;\n1;2";
         int expectedSum = 3;
 
@@ -84,8 +84,8 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByDelimiterLongerThanOneCharacter() {
-        String input = "//&&\n1&&2";
+    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByMultipleCharacterDelimiter() {
+        String input = "//&&;\n1&&;2";
         int expectedSum = 3;
 
         int actualSum = calculator.add(input);
@@ -93,13 +93,9 @@ public class StringCalculatorTest {
         assertThat(actualSum, is(expectedSum));
     }
 
-    //    @Test
-//    public void shouldReturnSumOfManyNumbersWhenInputtingNumbersSeparatedByAnyDelimiter() {
-//        String input = "//;\n1;2";
-//        int expectedSum = 6;
-//
-//        int actualSum = calculator.add(input);
-//
-//        assertThat(actualSum, is(expectedSum));
-//    }
+    @Test(expected=Exception.class)
+    public void shouldThrowExceptionWhenNegativeNumberIsInInput() {
+        String input = "1;2;-3";
+        calculator.add(input);
+    }
 }

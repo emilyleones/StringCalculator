@@ -25,6 +25,13 @@ public class StringCalculator {
         String[] numberList = numbers.split(delimiter);
         int sum = 0;
         for (String number : numberList) {
+            if (number.contains("-")) {
+                try {
+                    throw new Exception("negatives not allowed");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             sum += Integer.valueOf(number);
         }
         return sum;
