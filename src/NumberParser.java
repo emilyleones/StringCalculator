@@ -10,7 +10,6 @@ public class NumberParser {
     }
 
     public List<Integer> parse(String input) {
-        List<Integer> numbers;
         String delimiter = ",|\n";
         if (changingDelimiterFrom(input)) {
             delimiter = delimiterParser.parse(input);
