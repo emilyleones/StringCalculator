@@ -7,12 +7,12 @@ public class StringCalculator {
         if (input.isEmpty()) {
             return 0;
         }
-        return addUp(input);
+        return sumOf(input);
     }
 
-    private int addUp(String input) {
-        List<Integer> numbers = parseNumbersFrom(input);
+    private int sumOf(String input) {
         int sum = 0;
+        List<Integer> numbers = parseNumbersFrom(input);
         List<Integer> negatives = new ArrayList<>();
         for (int number : numbers) {
             if (isNegative(number)) {
@@ -21,10 +21,14 @@ public class StringCalculator {
                 sum += number;
             }
         }
+        checkForException(negatives);
+        return sum;
+    }
+
+    private void checkForException(List<Integer> negatives) {
         if (inputContainsNegativeNumbers(negatives)) {
             throw new IllegalArgumentException("negatives not allowed " + negatives);
         }
-        return sum;
     }
 
     private boolean inputContainsNegativeNumbers(List<Integer> negatives) {
