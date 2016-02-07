@@ -1,39 +1,67 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class StringCalculator {
 
-    public int add(String numbers) {
-        if (numbers.isEmpty()) {
+    public int add(String input) {
+        if (input.isEmpty()) {
             return 0;
         }
-        if (numbers.startsWith("//")) {
-            int delimiterStart = 2;
-            int delimiterEnd = numbers.indexOf("\n");
-            String delimiter = numbers.substring(delimiterStart, delimiterEnd);
-            return sum(numbers.substring(delimiterEnd+"\n".length()), delimiter);
-        }
-        if (numbers.contains(",") || numbers.contains("\n")) {
-            return sum(numbers, ",|\n");
-        }
-        return Integer.valueOf(numbers);
+        return addUp(input);
     }
 
-    private int sum(String numbers, String delimiter) {
-        String[] numberList = numbers.split(delimiter);
+    private int addUp(String input) {
+        List<Integer> numbers = parseNumbersFrom(input);
         int sum = 0;
-        for (String number : numberList) {
-            checkIfNegative(number);
-            sum += Integer.valueOf(number);
+        List<Integer> negatives = new ArrayList<>();
+        for (int number : numbers) {
+            if (isNegative(number)) {
+                negatives.add(number);
+            } else if (number <= 1000) {
+                sum += number;
+            }
+        }
+        if (inputContainsNegativeNumbers(negatives)) {
+            throw new IllegalArgumentException("negatives not allowed " + negatives);
         }
         return sum;
     }
 
-    private void checkIfNegative(String number) {
-        if (number.contains("-")) {
-            try {
-                throw new Exception("negatives not allowed");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    private boolean inputContainsNegativeNumbers(List<Integer> negatives) {
+        return negatives.size() > 0;
     }
+
+    private boolean isNegative(int number) {
+        return number < 0;
+    }
+
+    private List<Integer> parseNumbersFrom(String input) {
+        String delimiter = ",|\n";
+        if (input.startsWith("//")) {
+            delimiter = newDelimiter(input);
+            input = input.split("\n")[1];
+        }
+        String[] stringNumbers = input.split(delimiter);
+        List<Integer> numbers = new ArrayList<>();
+        for (String number : stringNumbers) numbers.add(Integer.valueOf(number));
+        return numbers;
+    }
+
+    private String newDelimiter(String input) {
+        if (input.contains("[")) {
+            String[] delimiters = input.split("\\[|\\]");
+            return complexDelimiter(delimiters);
+        }
+        return String.valueOf(input.charAt(2));
+    }
+
+    private String complexDelimiter(String[] delimiters) {
+        String complexDelimiter = "";
+        for (int i = 1; i < delimiters.length-1; i += 2) {
+            complexDelimiter += "\\" + delimiters[i] + "|";
+        }
+        return complexDelimiter.substring(0, complexDelimiter.length()-1);
+    }
+
+
 }
