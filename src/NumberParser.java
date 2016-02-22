@@ -11,21 +11,21 @@ public class NumberParser {
 
     public List<Integer> parse(String input) {
         String delimiter = ",|\n";
-        if (changingDelimiterFrom(input)) {
+        if (changingDelimiter(input)) {
             delimiter = delimiterParser.parse(input);
             input = input.split("\n")[1];
         }
         String[] stringNumbers = input.split(delimiter);
-        return convertedListOf(stringNumbers);
+        return convertToNumberList(stringNumbers);
     }
 
-    private List<Integer> convertedListOf(String[] stringNumbers) {
+    private List<Integer> convertToNumberList(String[] stringNumbers) {
         List<Integer> numbers = new ArrayList<>();
         for (String number : stringNumbers) numbers.add(Integer.valueOf(number));
         return numbers;
     }
 
-    private boolean changingDelimiterFrom(String input) {
+    private boolean changingDelimiter(String input) {
         return input.startsWith("//");
     }
 }

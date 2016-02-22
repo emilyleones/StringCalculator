@@ -13,10 +13,10 @@ public class StringCalculator {
         if (input.isEmpty()) {
             return 0;
         }
-        return sumOf(input);
+        return sum(input);
     }
 
-    private int sumOf(String input) {
+    private int sum(String input) {
         int sum = 0;
         List<Integer> numbers = numberParser.parse(input);
         List<Integer> negatives = new ArrayList<>();
